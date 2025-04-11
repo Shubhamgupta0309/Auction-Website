@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Auction Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-gavel me-2"></i>Auction House
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#active-auctions">Active Auctions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#previous-auctions">Previous</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" id="loginBtn">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fas fa-sign-in-alt me-1"></i>Login
+                        </a>
+                    </li>
+                    <li class="nav-item" id="registerBtn">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            <i class="fas fa-user-plus me-1"></i>Register
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="profileBtn">
+                        <a class="nav-link" href="profile.html">
+                            <i class="fas fa-user me-1"></i>Profile
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="adminBtn">
+                        <a class="nav-link" href="admin.html">
+                            <i class="fas fa-crown me-1"></i>Admin
+                        </a>
+                    </li>
+                    <li class="nav-item d-none" id="logoutBtn">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 text-white mb-4">Discover Unique Items at Amazing Prices</h1>
+                    <p class="lead text-white mb-4">Join our online auction platform and bid on exclusive items. Start your bidding journey today!</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-gavel"></i>
+                            <span id="activeAuctionsCount">0</span>
+                            <p>Active Auctions</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span id="totalUsersCount">0</span>
+                            <p>Active Bidders</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-trophy"></i>
+                            <span id="completedAuctionsCount">0</span>
+                            <p>Completed Auctions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="empty-state-card text-center">
+                        <div class="empty-state-illustration">
+                            <i class="fas fa-box-open fa-4x mb-4"></i>
+                        </div>
+                        <h3 class="text-white mb-3">New Auctions Coming Soon!</h3>
+                        <p class="text-white-50 mb-4">Stay tuned for exciting new items. We're preparing something special for you.</p>
+                        <div class="cta-buttons">
+                            <a href="#how-it-works" class="btn btn-light me-3">
+                                <i class="fas fa-info-circle me-2"></i>How It Works
+                            </a>
+                            <button class="btn btn-outline-light" onclick="showLoginPrompt()">
+                                <i class="fas fa-bell me-2"></i>Get Notified
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">How It Works</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h4>1. Register</h4>
+                        <p>Create your account to start bidding on items</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h4>2. Browse</h4>
+                        <p>Explore active auctions and find items you like</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h4>3. Bid</h4>
+                        <p>Place your bids on items you want to win</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h4>4. Win</h4>
+                        <p>Win the auction and claim your item</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Auctions Section -->
+    <section id="active-auctions" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Auctions</h2>
+            <div class="row" id="activeAuctionsList">
+                <!-- Active and upcoming auctions will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Previous Auctions Section -->
+    <section id="previous-auctions" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Previous Auctions</h2>
+            <div class="row" id="previousAuctionsList">
+                <!-- Previous auctions will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About Us</h5>
+                    <p>Your trusted online auction platform for unique and valuable items.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#active-auctions">Active Auctions</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Username" id="registerUsername" required>
+                            <div class="form-text" id="usernameStatus"></div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password" id="registerPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bid Modal -->
+    <div class="modal fade" id="bidModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Place Bid</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="auctionDetails" class="mb-3">
+                        <!-- Auction details will be loaded here -->
+                    </div>
+                    <form id="bidForm">
+                        <input type="hidden" id="bidAuctionId">
+                        <div class="mb-3">
+                            <label class="form-label">Your Bid Amount (₹)</label>
+                            <input type="text" inputmode="numeric" class="form-control" id="bidAmount" 
+                                   pattern="[0-9,]*" 
+                                   placeholder="Enter amount (e.g. 6,99,30,000)"
+                                   required>
+                            <div class="form-text" id="minimumBidText"></div>
+                            <div class="invalid-feedback" id="bidErrorMessage">Please enter a valid bid amount</div>
+                            <div class="form-text">Enter numbers only, commas will be handled automatically</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Bid</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong class="me-auto">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <!-- Toast message will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

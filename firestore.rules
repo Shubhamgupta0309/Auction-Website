@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Users collection rules
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.auth.uid == userId;
+      allow update: if isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Auctions collection rules
+    match /auctions/{auctionId} {
+      // Allow anyone to read auctions
+      allow read: if true;
+      
+      // Only admins can create auctions
+      allow create: if isAdmin();
+      
+      // Allow bid updates if:
+      // 1. User is authenticated
+      // 2. Auction hasn't ended
+      // 3. Bid amount is higher than current bid
+      // 4. User is not bidding on their own auction
+      allow update: if isAuthenticated() &&
+        resource.data.endTime > request.time &&
+        request.resource.data.currentBid > resource.data.currentBid &&
+        resource.data.createdBy != request.auth.uid;
+        
+      // Only admins can delete auctions
+      allow delete: if isAdmin();
+    }
+
+    // Admins collection rules
+    match /admins/{adminId} {
+      allow read: if isAuthenticated();
+      allow write: if false; // Only modifiable through backend
+    }
+  }
+}
